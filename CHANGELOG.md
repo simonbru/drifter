@@ -13,8 +13,10 @@ For migration information, you can always have a look at https://liip-drifter.re
 - Add [Pipenv](https://docs.pipenv.org/) role
 - Django role: add `django_use_pipenv` parameter to use Pipenv
 - Webpack role: a brand new way of handling front-end assets in your projects, preconfigured!
+- Python role: add the option to build Python from source
 
 ### Changed
+
 - Adapt postgis role to version 2
 - gitlab.liip.ch got a new ssh key.
 - Avoid compiling requirements files that are already compiled in the virtualenv role
