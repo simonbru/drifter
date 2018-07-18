@@ -26,3 +26,13 @@
     - deb https://packages.sury.org/php {{ ansible_distribution_release }} main
   become: yes
   when: "ansible_lsb.major_release|int >= 7 and {{ php_version_installed| version_compare('7.0', '>=') }}"
+
+- name: debian-repo | Mark packages.sury.org repository for PHP 7.x on Debian as lower priority
+  copy:
+    dest: /etc/apt/preferences.d/packages_sury_org
+    content: |
+      Package: *
+      Pin: origin "packages.sury.org"
+      Pin-Priority: 100
+  become: yes
+  when: "ansible_lsb.major_release|int >= 7 and {{ php_version_installed| version_compare('7.0', '>=') }}"
