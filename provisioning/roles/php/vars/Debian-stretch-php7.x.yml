@@ -1,4 +1,4 @@
-# debian 9, 2017-06-17
+# debian 9 released on 2017-06-17
 php_packages:
   - php{{ php_version_installed }}-common
   - php{{ php_version_installed }}-cli
