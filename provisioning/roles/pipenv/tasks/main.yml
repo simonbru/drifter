@@ -11,9 +11,18 @@
 - name: Run pipenv install
   command: pipenv install --dev
 
-# Ensure that a previous install that would have added the activate script to the bashrc is not active
-- name: Don't activate virtualenv when sshing into the box
+- name: Retrieve venv root
+  shell: pipenv --venv
+  register: env_root_output
+
+- set_fact:
+    env_root={{ env_root_output.stdout }}
+
+- name: Activate virtualenv when sshing into the box
   lineinfile:
     dest: ~/.bashrc
     regexp: '^\. .*/bin/activate$'
-    state: absent
+    line: '. {{ env_root }}/bin/activate'
+
+- name: Let pipenv know it can manage this virtualenv
+  lineinfile: dest=~/.bashrc line='export PIPENV_ACTIVE=1'
